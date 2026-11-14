@@ -1,45 +1,207 @@
-body {
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+* {
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-        "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-        sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-        monospace;
-}
-
-.App {
-    text-align: center;
-}
-
-.App-logo {
-    height: 40vmin;
-    pointer-events: none;
-}
-
-.App-header {
-    background-color: #282c34;
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #0f172a, #1e1b4b);
+    color: #f8fafc;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
-    font-size: calc(10px + 2vmin);
+    align-items: center;
+    padding: 30px 20px;
+}
+
+/* Título principal */
+h1 {
+    font-size: 2.3rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 12px;
+    background: linear-gradient(90deg, #38bdf8, #a78bfa);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Descripción */
+p {
+    color: #94a3b8;
+    text-align: center;
+    font-size: 1rem;
+    margin-bottom: 30px;
+}
+
+/* Formulario */
+#formulario {
+    background: rgba(30, 41, 59, 0.85);
+    border: 1px solid rgba(148, 163, 184, 0.15);
+    border-radius: 20px;
+    padding: 35px;
+    width: 100%;
+    max-width: 450px;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.3);
+}
+
+/* Selector de imagen */
+#inputImagen {
+    width: 100%;
+    padding: 12px;
+    color: #cbd5e1;
+    background: #0f172a;
+    border: 1px solid #334155;
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 0.85rem;
+    cursor: pointer;
+}
+
+#inputImagen::file-selector-button {
+    background: #6366f1;
     color: white;
+    border: none;
+    border-radius: 7px;
+    padding: 10px 15px;
+    margin-right: 12px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background 0.3s ease;
 }
 
-.App-link {
-    color: #61dafb;
+#inputImagen::file-selector-button:hover {
+    background: #4f46e5;
 }
 
-.heart {
-    color: #ff0000;
+/* Contenedor de vista previa */
+.preview-caja {
+    width: 100%;
+    height: 230px;
+    background: rgba(15, 23, 42, 0.7);
+    border: 2px dashed #475569;
+    border-radius: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    transition: border-color 0.3s ease;
 }
 
-.small {
-    font-size: 0.75rem;
+.preview-caja:hover {
+    border-color: #818cf8;
+}
+
+/* Imagen seleccionada */
+#preview {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+/* Texto cuando no hay imagen */
+#textoPreview {
+    color: #64748b;
+    font-size: 0.9rem;
+    text-align: center;
+    padding: 15px;
+}
+
+/* Botón de analizar */
+#btnEnviar {
+    width: 100%;
+    background: linear-gradient(90deg, #6366f1, #8b5cf6);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 15px;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#btnEnviar:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
+}
+
+#btnEnviar:active:not(:disabled) {
+    transform: scale(0.98);
+}
+
+#btnEnviar:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Resultado de la IA */
+#resultado {
+    margin-top: 25px;
+    width: 100%;
+    max-width: 450px;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #a5b4fc;
+    line-height: 1.8;
+}
+
+#resultado:not(:empty) {
+    background: rgba(30, 41, 59, 0.85);
+    padding: 20px;
+    border: 1px solid #6366f1;
+    border-radius: 14px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    animation: aparecer 0.4s ease;
+}
+
+#resultado small {
+    font-size: 0.9rem;
+    font-weight: 400;
+}
+
+/* Animación */
+@keyframes aparecer {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Diseño adaptable a celulares */
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.7rem;
+    }
+
+    p {
+        font-size: 0.9rem;
+    }
+
+    #formulario {
+        padding: 22px;
+    }
+
+    .preview-caja {
+        height: 190px;
+    }
+
+    #resultado {
+        font-size: 1.2rem;
+    }
 }
